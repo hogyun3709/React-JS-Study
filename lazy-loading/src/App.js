@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import { css } from "@emotion/core";
 import data from "./data";
 import LazyLoad from "react-lazyload";
-import { SyncLoader } from "react-spinners";
-const Loading = () => (
-  <div className="post loading">
-    <h5>Loading...</h5>
-  </div>
-);
+import { HashLoader } from "react-spinners";
+
+const override = css`
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
 
 const Post = ({ id, title, body }) => (
   <div className="post">
@@ -20,6 +22,12 @@ const Post = ({ id, title, body }) => (
   </div>
 );
 
+const Loading = () => (
+  <div className="post loading">
+    <h5>Loading..</h5>
+  </div>
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -27,27 +35,31 @@ class App extends Component {
       loading: true
     };
   }
+
   render() {
     return (
       <div className="App">
         <h2>LazyLoad-Loading</h2>
         <div className="post-container">
           {data.map(post => (
-            <LazyLoad
-              key={post.id}
-              height={400}
-              offset={[-100, 100]}
-              placeholder={
-                <SyncLoader
-                  sizeUnit={"px"}
-                  size={150}
-                  color={"#123abc"}
-                  loading={this.state.loading}
-                />
-              }
-            >
-              <Post key={post.id} {...post} />
-            </LazyLoad>
+            <div className="post loading">
+              <LazyLoad
+                key={post.id}
+                height={100}
+                offset={[-100, 100]}
+                placeholder={
+                  <HashLoader
+                    css={override}
+                    sizeUnit={"px"}
+                    size={70}
+                    color={"#36D7B7"}
+                    loading={this.state.loading}
+                  />
+                }
+              >
+                <Post key={post.id} {...post} />
+              </LazyLoad>
+            </div>
           ))}
         </div>
       </div>
