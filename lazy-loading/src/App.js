@@ -25,7 +25,12 @@ const App = () => (
     <h2>LazyLoad-Loading</h2>
     <div className="post-container">
       {data.map(post => (
-        <LazyLoad key={post.id} placeholder={<Loading />}>
+        <LazyLoad
+          key={post.id}
+          height={200}
+          offset={[-100, 100]}
+          placeholder={<Loading />}
+        >
           <Post key={post.id} {...post} />
         </LazyLoad>
       ))}
