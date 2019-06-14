@@ -1,6 +1,6 @@
 import React from "react";
 import data from "./data";
-import LazyLoad from "react-lazyload"
+import LazyLoad from "react-lazyload";
 
 const Loading = () => (
   <div className="post loading">
@@ -10,6 +10,9 @@ const Loading = () => (
 
 const Post = ({ id, title, body }) => (
   <div className="post">
+    <div className="post-img">
+      <img src={`https://picsum.photos/id/${id}/1000/1000`} alt="..." />
+    </div>
     <div className="post-body">
       <h4>{title}</h4>
       <p>{body}</p>
